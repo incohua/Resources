@@ -4,7 +4,7 @@
 # GitHub仓库地址：https://github.com/Moli-X  发现BUG请反馈: @GodMoliibot  
 # 订阅频道: https://t.me/QuantX  
 # 加入群组：https://t.me/Skill_XX
-
+# Last Update： 2024-09-21
 
 
 #========= 基本配置 =========#
@@ -92,7 +92,7 @@ DNS:
     - "https://dns.alidns.com/dns-query"  
 
 #========= 建立锚点 =========#
-SelectProxies :  &P1   {type: select ,   proxies: [全球节点,香港节点,日本节点,美国节点,台湾节点,新加坡节点,韩国节点,全国直连] }
+SelectProxies :  &P1   {type: select ,   proxies: [香港节点,日本节点,美国节点,台湾节点,新加坡节点,韩国节点,全球节点,全国直连] }
 SelectPr      :  &P2   {type: select ,   proxies: [DIRECT,REJECT,] }
 HttpCheck     :  &C2   {type: http ,     interval: 86400 ,  health-check: {enable: true , url: http://www.gstatic.com/generate_204 , interval: 1800} }
 HttpDomain    :  &D1   {type: http ,     behavior: domain ,    interval: 86400}
@@ -100,6 +100,7 @@ HttpIpcidr    :  &I1   {type: http ,     behavior: ipcidr ,    interval: 86400}
 HttpClassical :  &C1   {type: http ,     behavior: classical , interval: 86400}
 UrlTest       :  &U1   {type: url-test , lazy: true ,  url: http://www.gstatic.com/generate_204 , interval: 900 , use: [Subscribe] }
 Select        :  &S1   {type: select ,   use: [Subscribe] }
+Fallback-auto :  &F1   {type: fallback , url: https://www.gstatic.com/generate_204 , interval: 900 , use: [Subscribe] } #Fallback-auto组 2024.9.21
 
 
 proxy-providers: 
@@ -126,11 +127,11 @@ proxy-groups:
   - {name: 拦截服务 , type: select, proxies: [REJECT,DIRECT] ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Reject.png  }
 
   - {name: 全球节点   , <<: *S1                                       ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Macao.png         }
-  - {name: 香港节点   , <<: *U1 , filter: "港|HK|(?i)Hong"            ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png     }             # U1更改为S1，即为手动选择
+  - {name: 香港节点   , <<: *F1 , filter: "(港|HK|(?i)Hong).*(HKT|HGC|HKBN|BGP)"            ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png     }             # U1更改为S1，即为手动选择
   - {name: 日本节点   , <<: *U1 , filter: "本|日本|JP|(?i)Japan"      ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png         }             # U1更改为S1，即为手动选择     
   - {name: 台湾节点   , <<: *U1 , filter: "台|湾|TW|(?i)Taiwan"       ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png        }             # U1更改为S1，即为手动选择
   - {name: 美国节点   , <<: *U1 , filter: "美|US|(?i)States|American" ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png }             # U1更改为S1，即为手动选择
-  - {name: 韩国节点   , <<: *U1 , filter: "韩|KR|(?i)Korea" ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/United_States.png }             # U1更改为S1，即为手动选择
+  - {name: 韩国节点   , <<: *U1 , filter: "韩|KR|(?i)Korea" ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png }             # U1更改为S1，即为手动选择
   - {name: 新加坡节点 , <<: *U1 , filter: "新|坡|SG|(?i)Singapore"    ,  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png     }             # U1更改为S1，即为手动选择
 
 
